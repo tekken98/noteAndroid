@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">note</string>
+    <string name="title_activity_note_select">noteSelect</string>
+    <string name="strSave">Save Note</string>
+    <string name="strLoad">Load Note</string>
+    <string name="strNew">New Note</string>
+</resources>

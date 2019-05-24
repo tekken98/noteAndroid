@@ -16,9 +16,8 @@ import android.widget.AdapterView.OnItemClickListener
 
 import kotlinx.android.synthetic.main.activity_note_select.*
 import kotlinx.android.synthetic.main.content_note_select.*
-import java.io.File
-import java.io.FileInputStream
-import java.io.InputStreamReader
+import java.io.*
+import java.nio.file.DirectoryStream
 import com.example.note.R.id.noteListView as noteListView1
 
 class noteSelect : AppCompatActivity() {
@@ -49,7 +48,11 @@ class noteSelect : AppCompatActivity() {
         try{
             val file = File(path)
             file.mkdir()
-            var files = file.listFiles()
+
+            var files = file.listFiles(
+                FileFilter { pathname-> return@FileFilter pathname.name.endsWith("note") })
+            //FileFilter { pathname->filteraccept(pathname.name) })
+
             var s = mutableListOf<String>()
             for ( a in files){
                 s.add(a.name )
@@ -60,5 +63,9 @@ class noteSelect : AppCompatActivity() {
             Log.d("Debug",e.toString())
         }
         return listOf("***")
+    }
+
+    private fun filteraccept(pathname:String) :Boolean{
+        return pathname.endsWith("note")
     }
 }
